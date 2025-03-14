@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-section {
+    background-color: #8E170F !important;
+    box-shadow: 0 -5px 15px #F0E0D0;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 500;
+}
+
+.nav-brand {
+    background-color: #F0E0D0 !important;
+    color: #8E170F !important;
+    font-weight: 900;
+    border-radius: 10px;
+    padding: 0.4% 1.2% !important;
+}
+
+.nav-items {
+    color: #F0E0D0 !important;
+    letter-spacing: 0.8px;
+    margin-left: 5px;
+}
+
+.nav-button {
+    background-color: #8E170F !important;
+    border: 1.8px solid #F0E0D0 !important;
+    color: #F0E0D0 !important;
+}
+
+.nav-button:hover {
+    background-color: #F0E0D0 !important;
+    border: 1.8px solid #8E170F !important;
+    color: #8E170F !important;
+}
+
+.page-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.form-container {
+    margin: 0;
+    border: 3px solid #131516;
+    height: 60vh;
+    width: 40vw !important;
+}
+
+.register-btn {
+    background-color: #B8336A !important;
+    border: none !important;
+}
+
+.movie-section {
+    min-height: 100vh;
+    background-color: black;
+    color: #FF99CC !important;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+}
+
+
+.movie-img {
+    border-radius: 0 !important;
+    padding: 0;
+}
+
+.movie-view-left {
+    width: 50vh !important;
+}
+
+.movie-view-right {
+    width: 30vh !important;
+}
+
+.gray-background {
+    background-color: #C3C9D5 !important;
+}
+
+.blue-background {
+    background-color: blue !important;
+}
+
+.white-background {
+    background-color: white !important;
+}
+
+.lato-900 {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+}
+
+.black-olive-bg {
+  background-color: #2A2C24 !important;
+
+}
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.bg{
+    background-image: url('https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW92aWUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww'); /* Update with your actual image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Full screen height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+    color: white; /* Adjust text color for better contrast */
+}
+
+/* Add a slight overlay for better readability */
+.home-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 1;
+}
+
+/* Ensure content is above the overlay */
+.home-content {
+    position: relative;
+    z-index: 2;
+}
