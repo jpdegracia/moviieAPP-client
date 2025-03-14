@@ -32,7 +32,7 @@ export default function AppNavbar() {
                         user.isAdmin ? (
                             // Admin view
                             <>                          
-                                <Nav.Link as={NavLink} to="/movies" className="me-3">Dashboard</Nav.Link>                        
+                                <Nav.Link as={NavLink} to="/movies" className="me-3">Admin</Nav.Link>                        
                                 <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
                             </>
                         ) : (

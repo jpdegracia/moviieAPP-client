@@ -5,6 +5,7 @@ import UserContext from '../UserContext';
 
 export default function Home() {
     const { user, setUser } = useContext(UserContext);
+    
 
     return (
         <Row>

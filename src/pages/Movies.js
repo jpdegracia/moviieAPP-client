@@ -1,96 +1,51 @@
-import { useState, useEffect, useContext } from 'react';
-import AdminView from '../components/AdminView';
+import React, { useEffect, useState } from 'react';
 import UserView from '../components/UserView';
-import UserContext from '../UserContext';
-import { Form, InputGroup, Alert } from 'react-bootstrap';
+import AdminView from '../components/AdminView';
 
-export default function Movies() {
-    const { user } = useContext(UserContext);
-    const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [sortOrder, setSortOrder] = useState('asc');
-    const [errorMessage, setErrorMessage] = useState(null);
-
-    const fetchData = () => {
-        let fetchUrl = `https://movieapp-api-lms1.onrender.com/movies/getMovies`;
-
-        fetch(fetchUrl, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => {
-            console.log("Response Status:", res.status); // Log HTTP status
-            return res.json();
-        })
-        .then(data => {
-            console.log("Fetched Data:", JSON.stringify(data, null, 2)); // Log full API response for debugging
-
-            if (Array.isArray(data)) {
-                setMovies(data);
-                setErrorMessage(null);
-            } else if (data.movies && Array.isArray(data.movies)) {
-                setMovies(data.movies);
-                setErrorMessage(null);
-            } else if (data.message) {
-                console.error("API Error:", data.message);
-                setErrorMessage(data.message);
-                setMovies([]);
-            } else {
-                console.error("Unexpected API response:", data);
-                setErrorMessage("Unexpected response from server.");
-                setMovies([]);
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching movies:", error);
-            setErrorMessage("Failed to fetch movies. Please try again later.");
-            setMovies([]);
-        });
-    };
+const MoviePage = () => {
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchData();
-    }, [user]);
+        const fetchUserRole = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                setIsAdmin(false);
+                setLoading(false);
+                return;
+            }
 
-    const filteredMovies = Array.isArray(movies) 
-        ? movies.filter(movie =>
-            movie?.name?.toLowerCase().includes(searchTerm.toLowerCase()) // Ensure movie.name exists
-        ).sort((a, b) => {
-            return sortOrder === 'asc'
-                ? (a.name || "").localeCompare(b.name || "") // Avoid undefined errors
-                : (b.name || "").localeCompare(a.name || "");
-        })
-        : [];
+            try {
+                const response = await fetch("https://movieapp-api-lms1.onrender.com/users/details", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-    return (
-        user.isAdmin ? (
-            <AdminView moviesData={movies} fetchData={fetchData} />
-        ) : (
-            <>
-                <h1 className="text-center mt-5">Movies:</h1>
+                if (!response.ok) {
+                    throw new Error("Failed to fetch user role");
+                }
 
-                <InputGroup className="mb-3 mt-5 gap-5">
-                    <Form.Control
-                        type="text"
-                        placeholder="Search movies..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <Form.Select onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
-                        <option value="asc">Sort A-Z</option>
-                        <option value="desc">Sort Z-A</option>
-                    </Form.Select>
-                </InputGroup>
+                const data = await response.json();
+                console.log("User Data:", data); // Debugging to check API response
 
-                {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+                // Ensure `isAdmin` is boolean and access correct structure
+                setIsAdmin(data.user?.isAdmin === true);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-                {filteredMovies.length === 0 && !errorMessage ? (
-                    <Alert variant="warning">No movies found.</Alert>
-                ) : (
-                    <UserView moviesData={filteredMovies} />
-                )}
-            </>
-        )
-    );
-}
+        fetchUserRole();
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    return isAdmin ? <AdminView /> : <UserView />;
+};
+
+export default MoviePage;

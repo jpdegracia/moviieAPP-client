@@ -135,17 +135,12 @@ const AdminView = () => {
             {loading && <Spinner animation="border" className="d-block mx-auto" />}
             {error && <Alert variant="danger">{error}</Alert>}
 
-            <Row className="mb-3">
-                <Col><Button variant="primary" onClick={() => navigate('/addMovie')}>Add Movie</Button></Col>
-                <Col className="text-end">
-                    <Form.Control 
-                        type="text" 
-                        placeholder="Search movies..." 
-                        value={searchTerm} 
-                        onChange={(e) => setSearchTerm(e.target.value)} 
-                    />
-                </Col>
-            </Row>
+        <Row className="mb-3 justify-content-center">
+            <Col className="d-flex justify-content-center">
+                <Button variant="primary" onClick={() => navigate('/addMovie')}>Add Movie</Button>
+            </Col>
+        </Row>
+
 
             <Table striped bordered hover>
                 <thead>
