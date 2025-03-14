@@ -137,16 +137,14 @@
 
 
 .bg{
-    background-image: url('https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW92aWUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww'); /* Update with your actual image path */
+
+    background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW92aWUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww'); /* Update with your actual image path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh; /* Full screen height */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 50px;
+    padding: 10px;
     color: white; /* Adjust text color for better contrast */
 }
 
